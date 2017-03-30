@@ -18,9 +18,8 @@ Q=vSigma_F*phi; %step3: initial fission source
 
 %itital iteration
 iter=1;
-%
 phi_next=myGaussSeidel(A,length(mesh)-2,e2,1/k*Q,phi);%phi vector
-%
+
 Q_next=vSigma_F*phi_next;%next fission source
 k_next=k*((h/2*Q_next(1)+h*(sum(Q_next)-Q_next(1)))/((h/2*Q(1)+h*(sum(Q)-Q(1)))));
 phi=phi_next;
@@ -30,9 +29,7 @@ e1_check=abs((k_next-k)/k_next);
 
 while e1_check>e1 %||e2_check>e2
     iter=iter+1;
-    %
     phi_next=myGaussSeidel(A,length(mesh)-2,e2,1/k_next*Q_next,phi);
-    %
     k=k_next;
     Q=Q_next;
     Q_next=vSigma_F*phi_next;%next fission source
